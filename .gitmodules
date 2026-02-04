@@ -6,3 +6,14 @@
 	path = funky-unikernel
 	url = git@github.com:TUM-DSE/funky-unikernel.git
 	branch = proteus
+[submodule "proteus-eval"]
+	path = proteus-eval
+	url = git@github.com:TUM-DSE/proteus-eval.git
+[submodule "Vitis_Accel_Examples"]
+	path = vitis-accel-examples
+	url = git@github.com:TUM-DSE/Vitis_Accel_Examples.git
+	branch = proteus-evaluation
+[submodule "funky-rosetta"]
+	path = funky-rosetta
+	url = git@github.com:TUM-DSE/funky-rosetta.git
+	branch = proteus
