@@ -12,7 +12,7 @@ If you want to build Proteus on your own machine, start from the beginning. If y
 
 ## System requirements
 
-We tested Proteus on Ubuntu 20.04 x86-64 with Linux kernel version 5.8.0-55. We used a total of four FPGA boards: 2x AMD/Xilinx Alveo U50 (8 GiB HBM) and 2x Alveo U280 (8 GiB HBM + 32 GiB DDR4). All four boards are only required for evaluation "5.5 Multi-task Workloads and Scalability", for other experiments one U50 and one U280 are sufficient.
+We tested Proteus on Ubuntu 20.04 x86-64 with Linux kernel version 5.8.0-55. We used a total of four FPGA boards: 2x AMD/Xilinx Alveo U50 (8 GiB HBM) and 2x Alveo U280 (8 GiB HBM + 32 GiB DDR4). All four boards are only required for evaluation "5.5 Multi-task Workloads and Scalability". For the other experiments one U50 and one U280 are sufficient.
 
 ## Build Proteus
 
@@ -200,6 +200,66 @@ For example, you can see the kernel clock frequency:
 ```txt
 Achieved Freq:  490.1 MHz
 ```
+
+### Evaluation 1: portability
+
+Go to the directory with the evaluation scripts:
+
+```bash
+cd $PROTEUS_DIR/funky-unikernel/funky-scripts/evaluation
+```
+
+Get the kernel clock frequencies for U50 and U280:
+
+```bash
+./get_bitstream_freq.sh
+```
+
+The frequencies for the Intel Stratix 10 have been manually collected from compilation reports.
+
+Get the total lines of code (LoC) of the applications:
+
+```bash
+cd portability && ./count_loc.sh $PROTEUS_DIR/vitis-accel-examples/ocl_kernels $PROTEUS_DIR/funky-rosetta
+```
+
+The LoC are shown in the file `loc_<date>_<time>/loc.csv`.
+
+Get the LoC of FPGA-related API calls:
+
+```bash
+./count_ocl_loc.sh
+```
+
+### Evaluation 2: performance
+
+#### End-to-end performance
+
+Measure the time of native applications with each FPGA configuration and 10 runs per application:
+
+```bash
+./measure_time_native.sh 10 u50-fast u280-fast u280-ddr-fast arria10-fast
+```
+
+You can also use bitstreams with lower frequency (200/300 MHz) by using `-slow` instead of `-fast` for the U50 and U280. These were used for Figure 2 in the "Background and Motivation" section.
+
+To run the same applications in Proteus:
+
+```bash
+./measure_time.sh 10 u50-fast u280-fast u280-ddr-fast arria10-fast
+```
+
+You can expect each script to run for at least six hours. The times are saved in the csv files in `time_(native_)<date>_<time>`.
+
+#### Overhead breakdown
+
+Get average overheads of 10 iterations:
+
+```bash
+./overheads.py 10
+```
+
+The times are save in `time_overheads_<date>_<time>/overheads.csv`.
 
 ### Troubleshooting
 
