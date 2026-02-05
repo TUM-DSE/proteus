@@ -12,7 +12,7 @@ If you want to build Proteus on your own machine, start from the beginning. If y
 
 ## System requirements
 
-We tested Proteus on Ubuntu 20.04 x86-64 with Linux kernel version 5.8.0-55.
+We tested Proteus on Ubuntu 20.04 x86-64 with Linux kernel version 5.8.0-55. We used a total of four FPGA boards: 2x AMD/Xilinx Alveo U50 (8 GiB HBM) and 2x Alveo U280 (8 GiB HBM + 32 GiB DDR4). All four boards are only required for evaluation "5.5 Multi-task Workloads and Scalability", for other experiments one U50 and one U280 are sufficient.
 
 ## Build Proteus
 
