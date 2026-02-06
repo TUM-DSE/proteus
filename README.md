@@ -203,7 +203,7 @@ Achieved Freq:  490.1 MHz
 
 ### Evaluation 1: portability
 
-Go to the directory with the evaluation scripts:
+Go to the directory with the evaluation scripts. We assume this is your current working directory in the remaining sections:
 
 ```bash
 cd $PROTEUS_DIR/funky-unikernel/funky-scripts/evaluation
@@ -260,6 +260,40 @@ Get average overheads of 10 iterations:
 ```
 
 The times are save in `time_overheads_<date>_<time>/overheads.csv`.
+
+### Evaluation 3: memory virtualization
+
+#### Data placement optimization
+
+Get average times of 10 iterations:
+
+```bash
+./mem_benchmarks.py 10
+```
+
+The times are saved in the csv files in `time_mem_<date>_<time>`.
+
+#### Memory oversubscription
+
+Get average times of 10 iterations:
+
+```bash
+./oversub.py 10
+```
+
+The times are saved in the csv files in `time_oversub_<date>_<time>`.
+
+#### Migration
+
+Get average overheads of 10 iterations:
+
+```bash
+cd state_management && ./run_benchmark.sh fpga_state_oh 10 && ./run_benchmark.sh vm_state_oh 10 && ./run_benchmark.sh migration_oh 10
+```
+
+The overheads are saved in the csv files in `{fpga_state,vm_state,migration}_oh_<date>_<time>`.
+
+### Evaluation 4: scheduling
 
 ### Troubleshooting
 
