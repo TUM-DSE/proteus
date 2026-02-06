@@ -1,5 +1,7 @@
 # Proteus: Heterogeneous FPGA Virtualization
 
+TODO: Refer to paper
+
 This repo consists of the following submodules:
 
 - funky-monitor: Proteus Hypervisor
