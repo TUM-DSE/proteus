@@ -295,6 +295,14 @@ The overheads are saved in the csv files in `{fpga_state,vm_state,migration}_oh_
 
 ### Evaluation 4: scheduling
 
+#### Scoring algorithm
+
+This is part of [Create tables and plots](#create-tables-and-plots).
+
+#### Multi-task workloads and scalability
+
+Coming soon...
+
 ### Troubleshooting
 
 #### ln: failed to create symbolic link '/tmp/bitstream_0.ukvm'
@@ -307,4 +315,32 @@ sudo rm /tmp/bitstream_0.ukvm
 
 ## Create tables and plots
 
-Coming soon.
+Go to proteus-eval and create a python venv:
+
+```bash
+cd $PROTEUS_DIR/proteus-eval && python3 -m venv .venv
+```
+
+Enter the venv:
+
+```bash
+source .venv/bin/activate
+```
+
+Install python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run all scripts:
+
+```bash
+./scripts/run-all.sh
+```
+
+The scripts create csv files and plots. If you ran the above command within the last five minutes, you can use the following command to see all files that have been modified by the scripts:
+
+```bash
+find . -newermt "5 minutes ago" -ls
+```
