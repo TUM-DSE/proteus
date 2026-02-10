@@ -214,7 +214,7 @@ cd $PROTEUS_DIR/funky-unikernel/funky-scripts/evaluation
 Get the kernel clock frequencies for U50 and U280:
 
 ```bash
-./get_bitstream_freq.sh
+./get_bitstream_freq.sh | tee frequencies.csv
 ```
 
 The frequencies for the Intel Stratix 10 have been manually collected from compilation reports.
@@ -230,7 +230,7 @@ The LoC are shown in the file `loc_<date>_<time>/loc.csv`.
 Get the LoC of FPGA-related API calls:
 
 ```bash
-./count_ocl_loc.sh
+./count_ocl_loc.sh | tee ocl-loc.csv
 ```
 
 ### Evaluation 2: performance
