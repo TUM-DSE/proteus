@@ -43,31 +43,19 @@ If you want to recreate Figure 10 from the paper, download the Intel FPGA SDK fo
 Clone this repository and submodules:
 
 ```bash
-git clone --recurse-submodules git@github.com:TUM-DSE/proteus.git
-```
-
-Set the `PROTEUS_DIR` environment variable:
-
-```bash
-cd proteus && export PROTEUS_DIR=$PWD
+git clone --recurse-submodules https://github.com/TUM-DSE/proteus.git
 ```
 
 Setup environment:
 
 ```bash
-source /opt/xilinx/xrt/setup.sh && source /tools/Intel/intelFPGA_pro/20.2/hld/init_opencl.sh
+cd proteus && source env.sh
 ```
 
-```bash
-cd funky-unikernel && mkdir IncludeOS_install && export INCLUDEOS_PREFIX=$PWD/IncludeOS_install
-```
+Prepare directories:
 
 ```bash
-export CC=clang && export CXX=clang++
-```
-
-```bash
-mkdir build && cd build
+cd funky-unikernel && mkdir $INCLUDEOS_PREFIX && mkdir build && cd build
 ```
 
 Setup tap device `tap100`:
@@ -118,11 +106,7 @@ Build Proteus applications:
 
 ## Run benchmarks
 
-Set the environment variable for the bitstream directory. On our severs, this is:
-
-```bash
-export BITSTREAM_DIR=/share/felix/bitstreams
-```
+The benchmark scripts expect the bitstreams in `$BITSTREAM_DIR/{vitis-accel-examples,rosetta}/<app>/<fpga>/bitstream`. On our servers, this directory already contains the bitstreams.
 
 ### Simple example application
 
