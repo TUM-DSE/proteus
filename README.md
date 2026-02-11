@@ -1,6 +1,6 @@
 # Proteus: Heterogeneous FPGA Virtualization
 
-TODO: Refer to paper
+This is the code for the paper "Proteus: Heterogeneous FPGA Virtualization" by Felix Gust, Shu Anzai, Charalampos Mainas, Atsushi Koshiba, and Pramod Bhatotia published at EuroSys'26.
 
 This repo consists of the following submodules:
 
@@ -10,7 +10,7 @@ This repo consists of the following submodules:
 - vitis-accel-examples: Vitis Accel Examples applications
 - proteus-eval: Data, scripts, and plots for the Proteus evaluation
 
-If you want to build Proteus on your own machine, start from the beginning. If you want to build Proteus on our server (momiji.dse.in.tum.de), start with [Setup](#setup).
+If you want to build Proteus on your own machine, start from the beginning. If you want to build Proteus on our servers, start with [Setup](#setup).
 
 ## System requirements
 
