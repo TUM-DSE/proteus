@@ -40,6 +40,24 @@ If you want to recreate Figure 10 from the paper, download the Intel FPGA SDK fo
 
 ### Setup
 
+At our chair, we have the following setup:
+
+- momiji.dse.in.tum.de: 2x U280
+- hinoki.dse.in.tum.de: 1x U50
+- sakura.dse.in.tum.de: 1x U50
+
+Set the following environment variable on the server with 2x U280:
+
+```bash
+export PROTEUS_FPGAS="u280-fast u280-ddr-fast" # on momiji
+```
+
+and on the servers with 1x U50:
+
+```bash
+export PROTEUS_FPGAS="u50-fast" # on hinoki and sakura
+```
+
 Clone this repository and submodules:
 
 ```bash
@@ -221,10 +239,10 @@ Get the LoC of FPGA-related API calls:
 
 #### End-to-end performance
 
-Measure the time of native applications with each FPGA configuration and 10 runs per application:
+For the setup at our chair, run the following two commands on momiji and hinoki. Measure the time of native applications with each FPGA configuration and 10 runs per application:
 
 ```bash
-./measure_time_native.sh 10 u50-fast u280-fast u280-ddr-fast arria10-fast
+./measure_time_native.sh 10 $PROTEUS_FPGAS arria10-fast
 ```
 
 You can also use bitstreams with lower frequency (200/300 MHz) by using `-slow` instead of `-fast` for the U50 and U280. These were used for Figure 2 in the "Background and Motivation" section.
@@ -232,7 +250,7 @@ You can also use bitstreams with lower frequency (200/300 MHz) by using `-slow` 
 To run the same applications in Proteus:
 
 ```bash
-./measure_time.sh 10 u50-fast u280-fast u280-ddr-fast arria10-fast
+./measure_time.sh 10 $PROTEUS_FPGAS arria10-fast
 ```
 
 You can expect each script to run for at least six hours. The times are saved in the csv files in `time_(native_)<date>_<time>`.
