@@ -49,14 +49,16 @@ At our chair, we have the following setup:
 Set the following environment variable on the server with 2x U280:
 
 ```bash
-export PROTEUS_FPGAS="u280-fast u280-ddr-fast" # on momiji
+export PROTEUS_FPGAS="u280-fast u280-ddr-fast"
 ```
 
 and on the servers with 1x U50:
 
 ```bash
-export PROTEUS_FPGAS="u50-fast" # on hinoki and sakura
+export PROTEUS_FPGAS="u50-fast"
 ```
+
+We note when an experiment should be run on a specific server.
 
 Clone this repository and submodules:
 
@@ -126,7 +128,7 @@ Build Proteus applications:
 
 The benchmark scripts expect the bitstreams in `$BITSTREAM_DIR/{vitis-accel-examples,rosetta}/<app>/<fpga>/bitstream`. On our servers, this directory already contains the bitstreams.
 
-### Simple example application
+### Simple example application (momiji)
 
 Go to the helloworld example:
 
@@ -237,15 +239,17 @@ Get the LoC of FPGA-related API calls:
 
 ### Evaluation 2: performance
 
+For the setup at our chair, run each of the following commands on momiji and hinoki.
+
 #### End-to-end performance
 
-For the setup at our chair, run the following two commands on momiji and hinoki. Measure the time of native applications with each FPGA configuration and 10 runs per application:
+Measure the time of native applications with each FPGA configuration and 10 runs per application:
 
 ```bash
 ./measure_time_native.sh 10 $PROTEUS_FPGAS arria10-fast
 ```
 
-You can also use bitstreams with lower frequency (200/300 MHz) by using `-slow` instead of `-fast` for the U50 and U280. These were used for Figure 2 in the "Background and Motivation" section.
+You can also use bitstreams with lower frequency (200/300 MHz) by using `-slow` instead of `-fast` for `PROTEUS_FPGAS`. These were used for Figure 2 in the "Background and Motivation" section.
 
 To run the same applications in Proteus:
 
@@ -266,6 +270,8 @@ Get average overheads of 10 iterations:
 The times are save in `time_overheads_<date>_<time>/overheads.csv`.
 
 ### Evaluation 3: memory virtualization
+
+Run the first two experiments on momiji.
 
 #### Data placement optimization
 
@@ -289,6 +295,8 @@ The times are saved in the csv files in `time_oversub_<date>_<time>`.
 
 #### Migration
 
+Run this on momiji and hinoki.
+
 Get average overheads of 10 iterations:
 
 ```bash
@@ -305,7 +313,13 @@ This is part of [Create tables and plots](#create-tables-and-plots).
 
 #### Multi-task workloads and scalability
 
-Coming soon...
+Create the required binaries and scripts in `sched_sim`:
+
+```bash
+./prepare_multitask.sh
+```
+
+More coming soon...
 
 ### Troubleshooting
 
