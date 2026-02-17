@@ -58,7 +58,7 @@ and on the servers with 1x U50:
 export PROTEUS_FPGAS="u50-fast"
 ```
 
-We note when an experiment should be run on a specific server.
+The following setup has to be completed on all servers. We note when an experiment should be run on a specific server.
 
 Clone this repository and submodules:
 
@@ -78,7 +78,7 @@ Prepare directories:
 cd funky-unikernel && mkdir $INCLUDEOS_PREFIX && mkdir build && cd build
 ```
 
-Setup tap device `tap100`:
+Setup tap devices (`tap0`, `tap1`, `tap100`) and remove old Proteus files in /tmp:
 
 ```bash
 $PROTEUS_DIR/funky-unikernel/funky-scripts/setup_tap_device.sh
@@ -213,7 +213,7 @@ For example, you can see the kernel clock frequency:
 Achieved Freq:  490.1 MHz
 ```
 
-### Evaluation 1: portability
+### Evaluation 1: portability (any server)
 
 Go to the directory with the evaluation scripts. We assume this is your current working directory in the remaining sections:
 
@@ -227,7 +227,7 @@ Get the kernel clock frequencies for U50 and U280:
 ./get_bitstream_freq.sh | tee frequencies.csv
 ```
 
-The frequencies for the Intel Stratix 10 have been manually collected from compilation reports.
+The frequencies for the Intel Stratix 10 have been collected from compilation reports manually.
 
 Get the total lines of code (LoC) of the applications:
 
@@ -319,17 +319,17 @@ This is part of [Create tables and plots](#create-tables-and-plots).
 
 #### Multi-task workloads and scalability
 
-Create the required binaries and scripts in `sched_sim`:
-
-```bash
-./prepare_multitask.sh
-```
-
 For these experiments we use three servers with the following IP addresses:
 
 - sakura: 131.159.102.5
 - hinoki: 131.159.102.6
 - momiji: 131.159.102.19
+
+Create the required binaries and scripts in `sched_sim` on all servers:
+
+```bash
+./prepare_multitask.sh
+```
 
 ##### Single U50
 
