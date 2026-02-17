@@ -325,7 +325,7 @@ Create the required binaries and scripts in `sched_sim`:
 ./prepare_multitask.sh
 ```
 
-IP addresses:
+For these experiments we use three servers with the following IP addresses:
 
 - sakura: 131.159.102.5
 - hinoki: 131.159.102.6
@@ -395,6 +395,76 @@ On hinoki in a third shell:
 
 ```bash
 bash sched_bins/2_fpga_50/deploy_script.sh
+```
+
+##### 2 U280
+
+On momiji:
+
+```bash
+stdbuf -oL sched_bins/2_fpga_280/primary | tee 2-u280.txt
+```
+
+On momiji in a second shell:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/2_fpga_280/daemon -i 131.159.102.19 -p 4217 -t 0
+```
+
+On momiji in a third shell:
+
+```bash
+UKVM_BIN=sched_bins/ukvm-bin-patched sched_bins/2_fpga_280/daemon -i 131.159.102.19 -p 4217 -t 1
+```
+
+On momiji in a fourth shell:
+
+```bash
+bash sched_bins/2_fpga_280/deploy_script.sh
+```
+
+##### 4 FPGAs
+
+On hinoki:
+
+```bash
+stdbuf -oL sched_bins/4_fpga/primary | tee 4-fpgas.txt
+```
+
+On hinoki in a second shell:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/4_fpga/daemon_u50 -i 131.159.102.6 -p 4217
+```
+
+On sakura:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/4_fpga/daemon_u50 -i 131.159.102.6 -p 4217
+```
+
+On momiji:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/4_fpga/daemon -i 131.159.102.6 -p 4217 -t 0
+```
+
+On momiji in a second shell:
+
+```bash
+UKVM_BIN=sched_bins/ukvm-bin-patched sched_bins/4_fpga/daemon -i 131.159.102.6 -p 4217 -t 1
+```
+
+On hinoki in a third shell:
+
+```bash
+bash sched_bins/4_fpga/deploy_script.sh
+```
+
+Finally, you can get the times on momiji and hinoki:
+
+```bash
+grep "200 tasks" *.txt
 ```
 
 ### Troubleshooting
