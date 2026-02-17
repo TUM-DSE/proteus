@@ -325,7 +325,7 @@ For these experiments we use three servers with the following IP addresses:
 - hinoki: 131.159.102.6
 - momiji: 131.159.102.19
 
-Create the required binaries and scripts in `sched_sim` on all servers:
+Make sure you have sourced `env.sh` in each shell. Create the required binaries and scripts in `sched_sim` on all servers:
 
 ```bash
 ./prepare_multitask.sh
