@@ -110,6 +110,12 @@ Install in `INCLUDEOS_PREFIX`:
 make install
 ```
 
+Make sure the monitor is executable:
+
+```bash
+chmod +x $INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin
+```
+
 ### Build applications
 
 Build native applications:
@@ -319,7 +325,77 @@ Create the required binaries and scripts in `sched_sim`:
 ./prepare_multitask.sh
 ```
 
-More coming soon...
+IP addresses:
+
+- sakura: 131.159.102.5
+- hinoki: 131.159.102.6
+- momiji: 131.159.102.19
+
+##### Single U50
+
+On hinoki:
+
+```bash
+stdbuf -oL ./sched_bins/1_fpga_u50/primary | tee single-u50.txt
+```
+
+On sakura:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/1_fpga_u50/daemon -i 131.159.102.6 -p 4217
+```
+
+On hinoki in a second shell:
+
+```bash
+bash sched_bins/1_fpga_u50/deploy_script.sh
+```
+
+##### Single U280
+
+On hinoki:
+
+```bash
+stdbuf -oL sched_bins/1_fpga_u280/primary | tee single-u280.txt
+```
+
+On momiji:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/1_fpga_u280/daemon -i 131.159.102.6 -p 4217
+```
+
+On hinoki in a second shell:
+
+```bash
+bash sched_bins/1_fpga_u280/deploy_script.sh
+```
+
+##### 2 U50
+
+On hinoki:
+
+```bash
+stdbuf -oL sched_bins/2_fpga_50/primary | tee 2-u50.txt
+```
+
+On hinoki in a second shell:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/2_fpga_50/daemon -i 131.159.102.6 -p 4217
+```
+
+On sakura:
+
+```bash
+UKVM_BIN=$INCLUDEOS_PREFIX/includeos/x86_64/lib/ukvm-bin sched_bins/2_fpga_50/daemon -i 131.159.102.6 -p 4217
+```
+
+On hinoki in a third shell:
+
+```bash
+bash sched_bins/2_fpga_50/deploy_script.sh
+```
 
 ### Troubleshooting
 
