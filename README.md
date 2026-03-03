@@ -1,6 +1,6 @@
 # Proteus: Heterogeneous FPGA Virtualization
 
-This is the code for the paper "Proteus: Heterogeneous FPGA Virtualization" by Felix Gust, Shu Anzai, Charalampos Mainas, Atsushi Koshiba, and Pramod Bhatotia published at EuroSys'26.
+This is the artifact for the paper "Proteus: Heterogeneous FPGA Virtualization" by Felix Gust, Shu Anzai, Charalampos Mainas, Atsushi Koshiba, and Pramod Bhatotia published at EuroSys'26. You can also find the artifact on [Zenodo](https://doi.org/10.5281/zenodo.18848257).
 
 This repo consists of the following submodules:
 
